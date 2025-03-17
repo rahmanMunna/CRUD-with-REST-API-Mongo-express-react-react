@@ -8,34 +8,34 @@ const UpdatePhoneData = () => {
     // console.log(phoneId)
 
     const receivedPhone = useLoaderData();
-    const [phone,setPhone] = useState(receivedPhone);
-    console.log(phone);
+    const [user,setUser] = useState(receivedPhone);
+    console.log(user);
 
     const handleUpdatePhone = (event) => {
         event.preventDefault();
 
         const form = event.target;
-        const phoneName = form.phoneName.value;
-        const price = form.price.value;
+        const email = form.email.value;
+        const phoneNumber = form.phoneNumber.value;
 
-        const updatedPhone = { phoneName, price }
-        console.log(updatedPhone);
+        const updatedUser = { email, phoneNumber }
+        console.log(updatedUser);
 
         //call PUT api
 
-        fetch(`http://localhost:5000/phones/${phone?.id}`, {
+        fetch(`http://localhost:5000/user/${user?._id}`, {
             method: "PUT",
             headers: {
                 "Content-type": 'application/json'
             },
-            body: JSON.stringify(updatedPhone)
+            body: JSON.stringify(updatedUser)
         })
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                if (result) {
+                if (result.modifiedCount > 0) {
                     alert('Updated Successfully');
-                    setPhone(result);              
+                    setUser(result);              
                 }
                 else{
                     alert('Could not been updated')
@@ -46,18 +46,18 @@ const UpdatePhoneData = () => {
         <div>
             <div>
                 {
-                    phone &&
+                    user &&
                     <div>
-                        <h2>Phone id : {phone?.id}</h2>
-                        <h2>phone Name : {phone?.phoneName}</h2>
-                        <h2>Price : {phone?.price}</h2>
+                        <h2>Phone id : {user?._id}</h2>
+                        <h2>phone Name : {user?.email}</h2>
+                        <h2>Price : {user?.phoneNumber}</h2>
                     </div>
                 }
             </div>
             <form onSubmit={handleUpdatePhone}>
-                <input type="text" placeholder="Enter a phone name" name="phoneName" />
+                <input type="email" placeholder="Enter your email" name="email" />
                 <br />
-                <input type="text" placeholder="Enter price" name="price" />
+                <input type="text" placeholder="Enter phone Number" name="phoneNumber" />
                 <br />
                 <input type="submit" value="Update" />
             </form>

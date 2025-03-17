@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Insert_data from './Insert_data.jsx'
 import Read_all_Data from './Read_all_Data.jsx'
 import User from './User.jsx'
-import UpdatePhoneData from './UpdatePhoneData.jsx'
+import UpdateUserData from './UpdateUserData.jsx'
 
 
 const router = createBrowserRouter([
@@ -23,9 +23,9 @@ const router = createBrowserRouter([
     element: <Read_all_Data></Read_all_Data>
   },
   {
-    path: '/updatePhoneData/:id',
-    element: <UpdatePhoneData></UpdatePhoneData>,
-    loader: ({ params }) => fetch(`http://localhost:5000/phones/${params.id}`)
+    path: '/updateUserData/:id',
+    element: <UpdateUserData></UpdateUserData>,
+    loader: ({ params }) => fetch(`http://localhost:5000/users/${params.id}`)
 
   },
   {

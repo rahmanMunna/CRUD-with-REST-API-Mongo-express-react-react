@@ -43,7 +43,7 @@ const Read_all_Data = () => {
                         <Link to={`/users/${user._id}`}>
                             <button>View More</button>
                         </Link>
-                        <Link to={`/updatePhoneData/${user?.id}`}>
+                        <Link to={`/updateUserData/${user?._id}`}>
                             <button>
                                 Update
                             </button>

@@ -51,6 +51,7 @@ async function run() {
 
             res.send(result);
         })
+
         //This HTTP API will send  a specific data
         app.get('/users/:id', async (req, res) => {
             const id = req.params.id;
@@ -60,6 +61,30 @@ async function run() {
             const cursor = await userCollection.findOne(query);
             // const result = await cursor.toArray();
             res.send(cursor);
+        })
+
+        //Update data by PUT API
+        app.put('/user/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedUser = req.body;
+            console.log(id);
+            console.log(updatedUser?.email);
+
+            //filter to find the data
+            const filter  = {_id : new ObjectId(id)};
+            const options = {upsert : true};
+
+            const updatedDoc = {
+                $set : {
+                    email : updatedUser.email,
+                    phoneNumber : updatedUser.phoneNumber
+                },
+            }
+
+            const result = await userCollection.updateOne(filter,updatedDoc,options);
+            res.send(result);
+            // console.log(result);
+
         })
 
 
